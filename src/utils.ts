@@ -4,7 +4,7 @@ export function isObjectValue(value: unknown): value is Nested {
   return typeof value === "object" && value !== null;
 }
 
-export function isArray(value: unknown): value is Array<unknown> {
+export function isArrayValue(value: unknown): value is Array<unknown> {
   return Array.isArray(value);
 }
 
@@ -24,7 +24,7 @@ export function isObjectTester(
   return typeof tester === "object" && tester !== null;
 }
 
-export function isArrayTester(tester: unknown): tester is Array<unknown> {
+export function isArrayTester(tester: unknown): tester is Array<Validator> {
   return Array.isArray(tester);
 }
 

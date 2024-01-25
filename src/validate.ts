@@ -1,5 +1,5 @@
 import { Results, Source, Tester } from "./types";
-import { isObjectValue, isObjectTester, isPrimitiveValue, isPrimitiveTester } from "./utils";
+import { isObjectValue, isObjectTester, isPrimitiveValue, isPrimitiveTester, isArrayTester, isArrayValue } from "./utils";
 
 export default function validate<
   V extends Source,
@@ -14,6 +14,20 @@ export default function validate<
       required: testers.required,
       errors: [],
     } as R;   
+  } else if (isArrayValue(value)) {
+    
+      return value.map((valueItem, index) => {
+        let testerItem: Tester<typeof valueItem>;
+        if (isArrayTester(testers)) {
+          testerItem = testers[index];
+        } else if (isPrimitiveTester(testers)){
+          testerItem = testers;
+        } else {
+          throw new Error("Invalid tester");
+        }
+        return validate(valueItem, testerItem, source);
+      }) as R;
+    
   } else if (isObjectTester(testers) && isObjectValue(value)) {
     
     return Object.keys(testers).reduce((acc, key) => {

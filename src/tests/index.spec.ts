@@ -10,6 +10,29 @@ it("validates primitivies", () => {
   assert.deepStrictEqual(validate(2, { required: true, func: isNumberFunc }), { valid: true, required: true, errors: []});
 });
 
+it("validates array of primitives", () => {
+  const source = ["test", "test2"];
+  const tester: Tester<typeof source> = {
+    required: true,
+    func: ({ value }) => isString(value),
+  };
+  const result = validate(source, tester);
+  assert.deepStrictEqual(result, [{ valid: true, required: true, errors: []}, { valid: true, required: true, errors: []}]);
+});
+
+it("validates strict array of primitives", () => {
+  const source = ["test", 3];
+  const tester: Tester<typeof source> = [{
+    required: true,
+    func: ({ value }) => isString(value),
+  }, {
+    required: true,
+    func: ({ value }) => isString(value),
+  }];
+  const result = validate(source, tester);
+  assert.deepStrictEqual(result, [{ valid: true, required: true, errors: []}, { valid: false, required: true, errors: []}]);
+});
+
 
 it("validates an object", () => {
 

@@ -1,9 +1,10 @@
 export type Primitive = string | boolean | number | null | undefined;
+export type Collection = Array<Primitive>;
 export type Nested = {
   [key: string]: Nested | Primitive;
 };
 
-export type Source = Primitive | Nested;
+export type Source = Primitive | Collection | Nested;
 
 export type NestedTester<V extends Nested, S extends Source> = {
   [K in keyof V]?: Tester<V[K], S>;
@@ -14,6 +15,9 @@ export type Tester<
   S extends Source = V
 > = [V] extends [Primitive]
   ? Validator<V, S>
+  : V extends Collection
+  // TODO: Fix this
+  ? Tester<V[number], S> | { [I in keyof V]: Tester<V[number], S>}
   : V extends Nested
   ? NestedTester<V, S>
   : never;
