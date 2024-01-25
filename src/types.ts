@@ -14,7 +14,7 @@ export type Tester<
   S extends Source = V
 > = [V] extends [Primitive]
   ? Validator<V, S>
-  : [V] extends [Nested]
+  : V extends Nested
   ? NestedTester<V, S>
   : never;
 
@@ -34,7 +34,6 @@ export type Validator<T extends Primitive = Primitive, S extends Source = Source
   required?: boolean;
   func: TestingFunc<T, S>;
 };
-;
 
 export interface Result {
   valid: boolean;

@@ -1,6 +1,6 @@
 import { Nested, NestedTester, Primitive, Source, Validator } from "./types";
 
-export function isObject(value: unknown): value is Nested {
+export function isObjectValue(value: unknown): value is Nested {
   return typeof value === "object" && value !== null;
 }
 
@@ -8,7 +8,7 @@ export function isArray(value: unknown): value is Array<unknown> {
   return Array.isArray(value);
 }
 
-export function isPrimitive(value: unknown): value is Primitive {
+export function isPrimitiveValue(value: unknown): value is Primitive {
   return (
     typeof value === "number" ||
     typeof value === "string" ||
