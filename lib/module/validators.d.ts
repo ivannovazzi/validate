@@ -1,0 +1,10 @@
+import { Primitive, TestingFunc, Validator } from "./types";
+export declare const isNumber: (value: unknown) => boolean;
+export declare const isString: (value: unknown) => boolean;
+export declare const isBoolean: (value: unknown) => boolean;
+export declare const isNumberFunc: TestingFunc;
+export declare const isStringFunc: TestingFunc;
+export declare const isBooleanFunc: TestingFunc;
+export declare const numberValidator: Validator<Primitive>;
+export declare const stringValidator: Validator<Primitive>;
+export declare const booleanValidator: Validator<Primitive>;

@@ -1,9 +1,9 @@
 import assert from "assert";
 import { it } from "node:test";
 
-import { Tester } from "../src/types";
-import validate from "../src/validate";
-import { booleanValidator, isBooleanFunc, isNumber, isNumberFunc, isString, numberValidator, stringValidator } from "../src/validators";
+import { Tester } from "../types";
+import validate from "../validate";
+import { booleanValidator, isBooleanFunc, isNumber, isNumberFunc, isString, numberValidator, stringValidator } from "../validators";
 
 
 it("validates primitivies", () => {
